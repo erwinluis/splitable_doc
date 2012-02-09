@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>splitable_doc</title>
+    <link href="style.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Shanti:400|PT+Sans:700,700italic' rel='stylesheet' type='text/css'>
+</head>
+<body class='literate'>
+  <div id='all'><p class=" brief"><img src="https://www.splitable.com/images/logo.png?1327850834" alt="Splitable"></p>
+
+<section class=" h2 checkout_with_splitable"><h2 id="checkout_with_splitable">Checkout with Splitable</h2>
+
+<p><code>checkout with splitable</code> allows store owners to allow their customers to split the cost of a product or a service. It works pretty similar to <code>checkout with paypal</code>.</p>
+
+<section class=" h3 how_it_works"><h3 id="how_it_works">How it works</h3>
+
+<ul>
+<li>Store sends a <code>POST</code> request to splitable with valid <code>api_key</code>, <code>total_amount</code> and other required parameters.</li>
+<li>User sees splitable website with the line items and the total amount that is being split among friends.</li>
+<li>User invites friends to split the total cost.</li>
+<li>Invited users pay their share.</li>
+<li>When everyone pays then the splitable sends a callback to the client site indicating that everyone has paid.</li>
+<li>The callback includes invoice and the api_secret to prevent and forgery.</li>
+<li>In case everyone does not pay and time lapses then callback will indicate that the team was cancelled.</li>
+</ul></section><section class=" h3 getting_api_key"><h3 id="getting_api_key">Getting api_key</h3>
+
+<p>In order to checkout with splitable, client needs to do following things:</p>
+
+<ul>
+<li>Register your company</li>
+<li>Go to company settings page and make a note of api_key value.</li>
+</ul></section><section class=" h3 sending_the_request"><h3 id="sending_the_request">Sending the request</h3>
+
+<p>When a user clicks on "checkout with splitable" then request should go to the client's server then that server should send a GET request to https://splitable.com/split_payments/split?. Following parameters can be passed.</p>
+
+<ul>
+<li>api_key : This is a required parameter. This field is used to ensure that it is an authentic request and not a forgery.
+invoice: This is a required parameter. Splitable callbacks contains this to indicate the given callbacks is for which invoice.</li>
+<li>api<em>notify</em>url: This is a required parameter. This is the url to which callback will be invoked. More information about callback is given below.</li>
+<li>total_amount. This is a required parameter. Total amount that needs to be split should be sent in cents. Please note that the value for this field should be in cents.</li>
+<li>api<em>secret: This is an optional parameter. When splitable sends the callbacks then the callback will contain a parameter called api</em>secret. Usually the callback will send the api<em>secret value that is registered at the company level. However if the GET request sends api</em>secret then that api_secret will be used in the callback.</li>
+<li>expires<em>in: This is an optional parameter. The value for this value should be an integer. This field indicates how many hours is allowed for a team to close. Typically client should pass 48 or 72. If no value is passed then by default 5 days are allowed for a team to close. If expires</em>in value is non numeric then no error will be raised. In that case it would be assumed as if no expires<em>in value is passed. If expires</em>in value is greater than 120 hours then the value will be ignored and no error will be raised.</li>
+<li>shipping: This is an optional parameter. This field indicates the shipping cost to be shown. Please note that value must be in cents.</li>
+<li>tax: This is an optional parameter. This field indicates the tax to be shown. Please note that value must be in cents.</li>
+</ul></section><section class=" h3 multiple_line_items"><h3 id="multiple_line_items">Multiple line items</h3>
+
+<p>Since splitable supports multiple line items given below is an example of two line items. Splitable supports upto 20 line items for each order. An order with zero line item will be rejected.</p>
+
+<ul>
+<li>item<em>name</em>1: This is a required parameter. This field is used to display the title of the item for which money is being split.</li>
+<li>quantity<em>1: This is a required parameter. This field indicates the number of the products being purchased.
+amount</em>1: This is a required parameter. This field indicates the price of the product in cents. Please note that the amount should be in <em>cents</em> .</li>
+<li>url_1: This is an optional field. This field indicates the url of the product where user can go to see more details about the product.</li>
+</ul>
+<p>Similarly the keys for the second line item will be: item<em>name</em>2, quantity<em>2, amount</em>2.</p>
+
+<p>Similarly the keys for the third line item will be: item<em>name</em>3, quantity<em>3, amount</em>3.</p>
+
+</section><section class=" h3 callback_webhook"><h3 id="callback_webhook">Callback/Webhook</h3>
+
+<p>When everyone in team pays or when team is cancelled because everyone did not pay within the allotted time then splitable makes a callback to the client site. The url that is used for callback is the <code>api_notify_url</code> that the client provided while signing up for the api services.</p>
+
+<ul>
+<li>invoice: This is the same value that client passed to splitable when it made <code>POST</code> request.</li>
+<li>payment_status: This value will be either <code>paid</code> or <code>cancelled</code>. <code>paid</code> means each team member's credit card has been captured. <code>cancelled</code> means the team could not pay within the allocated time frame.</li>
+<li>api_secret: This is to prevent forgery. Usually this value is taken from the company settings. However if the <code>POST</code> request contained <code>api_secret</code> then that value is used.</li>
+<li>transaction<em>id: This is so that you have a unique transaction</em>id in your system regarding this transaction. Also if merchant needs to contact Splitable regarding the payment then this value would be required. This parameter is also required for issuing refund.</li>
+</ul>
+<p>Please note that a callback is always a <code>POST</code> request.</p></section></section></div>
+  <script type='text/javascript' src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js'></script>
+  <script>prettyPrint();</script>
+</body>
+</html>
