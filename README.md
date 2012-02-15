@@ -38,10 +38,26 @@ When a user clicks on `checkout with splitable` then a `POST` request should be 
       <th>Default</th>
       <th>Required?</th>
     </tr>
+    <tr>
+      <td>api_key</td>
+      <td>string</td>
+      <td>This field is used to ensure that it is an authentic request and not a forgery.</td>
+      <td>'69f46e9fbc67a916'</td>
+      <td>N/A</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>invoice</td>
+      <td>string</td>
+      <td>Usually it is an order id. It is a way for the store to track for which order is using Splitable.</td>
+      <td>'100456'</td>
+      <td>N/A</td>
+      <td>Yes</td>
+    </tr>
   </tbody>
 </table>
 
-    { api_key: '320882ab45',
+    { api_key: '69f46e9fbc67a916',
       invoice: '1234'
       }
 
