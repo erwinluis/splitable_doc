@@ -7,7 +7,9 @@
 
 ### How it works
 
-* Store sends a `POST` request to splitable with valid `api_key`, `total_amount` and other required parameters.
+* User clicks on a button or takes an action to indicate the user wants to split the amount.
+* Browser sends a request (GET or POST) reques to the store server.
+* Store server sends a `POST` request to splitable with valid `api_key`, `total_amount` and other required parameters.
 * User sees splitable website with the line items and the total amount that is being split among friends.
 * User invites friends to split the total cost.
 * Invited users pay their share.
