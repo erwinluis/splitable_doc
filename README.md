@@ -70,6 +70,33 @@ When everyone in team pays or when team is cancelled because everyone did not pa
 
 Please note that a callback is always a `POST` request.
 
+In order to ensure that client has indeed received the callback Splitable checks the http resonse code for the callback made. If the response code is not `200` then splitable will make another attempt to make the callback in increasing order of time. In total Splitable will make 25 attempts and the distribution of those 25 attempts is given below.
+
+    1st attempt : less than a minute
+    2nd attempt : less than a minute
+    3rd attempt : 1 minute
+    4th attempt : 4 minutes
+    5th attempt : 11 minutes
+    6th attempt : 22 minutes
+    7th attempt : 40 minutes
+    8th attempt : about 1 hour
+    9th attempt : about 2 hours
+    10th attempt : about 3 hours
+    11th attempt : about 4 hours
+    12th attempt : about 6 hours
+    13th attempt : about 8 hours
+    14th attempt : about 11 hours
+    15th attempt : about 14 hours
+    16th attempt : about 18 hours
+    17th attempt : about 23 hours
+    18th attempt : 1 day
+    19th attempt : 1 day
+    20th attempt : 2 days
+    21st attempt : 2 days
+    22nd attempt : 3 days
+    23rd attempt : 3 days
+    24th attempt : 4 days
+    25th attempt : 5 days
 
 ### Code in Ruby
 
@@ -87,4 +114,6 @@ Below is an example of `POST` request being sent to `https://www.splitable.com/a
     response = conn.post '/api/splits', options
     data = ActiveSupport::JSON.decode(response.body)
 
+Below is an exampel of how ruby code can respond `200` to the callback made by Splitable.
 
+    render nothing: true, status: 200
