@@ -29,13 +29,13 @@ In order to checkout with splitable, client needs to do following things:
 When a user clicks on `checkout with splitable` then a `POST` request should be made to the splitable url with following parameters.
 
 * api_key : This is a *required* parameter. This field is used to ensure that it is an authentic request and not a forgery.
-* invoice: This is a *required* parameter. Usually it is order id. It is a way for the store to track for which order user wants to split the amount.
-* api_notify_url: This is a *required* parameter. This is the url to which callback will be invoked. More information about callback is given below.
-* total_amount. This is a *required* parameter. Total amount that needs to be split should be sent *in cents*. Again please note that the value for this field should be in cents.
-* api_secret: This is an optional parameter. When splitable sends the callbacks then the callback will contain a parameter called api_secret. Usually the callback will send the api_secret value that is registered at the company level. However if the GET request sends api_secret then that api_secret will be used in the callback.
-* expires_in: This is an optional parameter. The value for this value should be an integer. This field indicates how many hours is allowed for a team to close. Typically client should pass 48 or 72. If no value is passed then by default 5 days are allowed for a team to close. If expires_in value is non numeric then no error will be raised. In that case it would be assumed as if no expires_in value is passed. If expires_in value is greater than 120 hours then the value will be ignored and no error will be raised.
-* shipping: This is an optional parameter. This field indicates the shipping cost to be shown. Please note that value must be in cents.
-* tax: This is an optional parameter. This field indicates the tax to be shown. Please note that value must be in cents.
+* invoice : This is a *required* parameter. Usually it is order id. It is a way for the store to track for which order user wants to split the amount.
+* api_notify_url : This is a *required* parameter. This is the url to which callback will be invoked. More information about callback is given below.
+* total_amount : This is a *required* parameter. Total amount that needs to be split should be sent *in cents*. Again please note that the value for this field should be in cents.
+* api_secret : This is an optional parameter. When splitable sends the callbacks then the callback will contain a parameter called api_secret. Usually the callback will send the api_secret value that is registered at the company level. However if the GET request sends api_secret then that api_secret will be used in the callback.
+* expires_in : This is an optional parameter. The value for this value should be an integer. This field indicates how many hours is allowed for a team to close. Typically client should pass 48 or 72. If no value is passed then by default 5 days are allowed for a team to close. If expires_in value is non numeric then no error will be raised. In that case it would be assumed as if no expires_in value is passed. If expires_in value is greater than 120 hours then the value will be ignored and no error will be raised.
+* shipping : This is an optional parameter. This field indicates the shipping cost to be shown. Please note that value must be in cents.
+* tax : This is an optional parameter. This field indicates the tax to be shown. Please note that value must be in cents.
 
 ### Multiple line items
 
