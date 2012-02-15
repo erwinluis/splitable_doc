@@ -26,7 +26,7 @@ In order to checkout with splitable, client needs to do following things:
 
 ### Sending the request
 
-When a user clicks on `checkout with splitable` then a `POST` request should be made to the splitable url with following parameters.
+When a user clicks on `checkout with splitable` then a `POST` request should be made to `https://splitable.com/api/splits` with following parameters.
 
 * api_key : This is a *required* parameter. This field is used to ensure that it is an authentic request and not a forgery.
 * invoice : This is a *required* parameter. Usually it is order id. It is a way for the store to track for which order user wants to split the amount.
@@ -37,6 +37,15 @@ When a user clicks on `checkout with splitable` then a `POST` request should be 
 * shipping : This is an optional parameter. This field indicates the shipping cost to be shown. Please note that value must be in cents.
 * tax : This is an optional parameter. This field indicates the tax to be shown. Please note that value must be in cents.
 
+The response of the request is always a JSON structure.
+
+In case of success the JSON might look like this
+
+    { success: "https://splitable.splitable.com/items/boat-racing/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team"}
+
+In case of error the JSON might look like this
+
+    { error: "api_key is missing" }
 ### Multiple line items
 
 Since splitable supports multiple line items given below is an example of two line items. Splitable supports upto 20 line items for each order. An order with zero line item will be rejected.
@@ -60,5 +69,22 @@ When everyone in team pays or when team is cancelled because everyone did not pa
 * transaction_id: This is so that you have a unique transaction_id in your system regarding this transaction. Also if merchant needs to contact Splitable regarding the payment then this value would be required. This parameter is also required for issuing refund.
 
 Please note that a callback is always a `POST` request.
+
+
+### Code in Ruby
+
+`Checkout with Splitable` does not depend on any language. The http `POST` request can be made in any lanauge. We at Splitable.com use `ruby` as programming language. Here are some code snippets which might help you understand the API better.
+
+Below is an example of `POST` request being sent to `https://www.splitable.com/api/splits` and the response is being parsed.
+
+    conn = Faraday.new(:url => 'https://www.splitable.com') do |builder|
+      builder.use Faraday::Request::UrlEncoded  # convert request params as "www-form-urlencoded"
+      builder.use Faraday::Response::Logger     # log the request to STDOUT
+      builder.use Faraday::Adapter::NetHttp     # make http requests with Net::HTTP
+    end
+
+    options = base_data(order, request).merge(line_items_data(order, request))
+    response = conn.post '/api/splits', options
+    data = ActiveSupport::JSON.decode(response.body)
 
 
