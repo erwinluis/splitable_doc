@@ -28,6 +28,23 @@ In order to checkout with splitable, client needs to do following things:
 
 When a user clicks on `checkout with splitable` then a `POST` request should be made to `https://splitable.com/api/splits` with following parameters.
 
+<table>
+  <tbody>
+    <tr>
+      <th>Parameters</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Example</th>
+      <th>Default</th>
+      <th>Required?</th>
+    </tr>
+  </tbody>
+</table>
+
+    { api_key: '320882ab45',
+      invoice: '1234'
+      }
+
 * api_key : This is a *required* parameter. This field is used to ensure that it is an authentic request and not a forgery.
 * invoice : This is a *required* parameter. Usually it is order id. It is a way for the store to track for which order user wants to split the amount.
 * api_notify_url : This is a *required* parameter. This is the url to which callback will be invoked. More information about callback is given below.
