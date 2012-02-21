@@ -3,7 +3,7 @@
 
 ## Checkout with Splitable
 
-`checkout with splitable` allows store owners to allow their customers to split the cost of a product or a service. It works pretty similar to `checkout with paypal`.
+`checkout with splitable` gives store owners the ability to allow their customers to split the cost of a product or service. It works pretty similar to `checkout with paypal`.
 
 ### How it works
 
@@ -28,39 +28,17 @@ In order to checkout with splitable, client needs to do following things:
 
 When a user clicks on `checkout with splitable` then a `POST` request should be made to `https://splitable.com/api/splits` with following parameters.
 
-<table>
-  <tbody>
-    <tr>
-      <th>Parameters</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Example</th>
-      <th>Default</th>
-      <th>Required?</th>
-    </tr>
-    <tr>
-      <td>api_key</td>
-      <td>string</td>
- forgery.</td>
-      <td>'69f46e9fbc67a916'</td>
-      <td>N/A</td>
-      <td>Yes</td>
-      <td width="30%">This field is used to ensure that it is an authentic request and not a
-    </tr>
-    <tr>
-      <td>invoice</td>
-      <td>string</td>
-      <td>'100456'</td>
-      <td>N/A</td>
-      <td>Yes</td>
-      <td width="30%">Usually it is an order id. It is a way for the store to track for which order is using Splitable.</td>
-    </tr>
-  </tbody>
-</table>
+`POST - https://acme.splitable.com/api/splits`
 
-    { api_key: '69f46e9fbc67a916',
-      invoice: '1234'
-      }
+    { "api_key": "69f46e9fbc67a916",
+      "invoice": "1234",
+      "api_notify_url": "http://www.acme.com/instant_payment_notification/splitable",
+      "total_amount": "35000",
+      "api_secret": "8c7834351d781964",
+      "expires_in": "48",
+      "shipping": "1000",
+      "tax": "5000",
+    }
 
 * api_key : This is a *required* parameter. This field is used to ensure that it is an authentic request and not a forgery.
 * invoice : This is a *required* parameter. Usually it is order id. It is a way for the store to track for which order user wants to split the amount.
@@ -75,7 +53,7 @@ The response of the request is always a JSON structure.
 
 In case of success the JSON might look like this
 
-    { success: "https://splitable.splitable.com/items/boat-racing/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team"}
+    { success: "https://yourcompanyname.splitable.com/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team"}
 
 In case of error the JSON might look like this
 
