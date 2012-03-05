@@ -40,21 +40,21 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
       "tax": "5000"
     }
 
-* `api_key`: This field is used to ensure that it is an authentic request. This is a *required* parameter. 
+`api_key`: This field is used to ensure that it is an authentic request. This is a *required* parameter. 
 
-* `invoice`: An identifier from your site to keep track of what will be split, often represented as an order id. This is a *required* parameter.
+`invoice`: An identifier from your site to keep track of what will be split, often represented as an order id. This is a *required* parameter.
 
-* `api_notify_url`: This is the callback url which split(able) will use to notify your site if a split is successful or not. More information about the callback is given below. This is a *required* parameter.
+`api_notify_url`: This is the callback url which split(able) will use to notify your site if a split is successful or not. More information about the callback is given below. This is a *required* parameter.
 
-* `total_amount`: This is the total amount to be split. The value for this parameter must be *in cents*. Again, please note that this value must be *in cents*. This is a *required* parameter.
+`total_amount`: This is the total amount to be split. The value for this parameter must be *in cents*. Again, please note that this value must be *in cents*. This is a *required* parameter.
 
-* `api_secret`: When split(able) sends the callback, it will contain this parameter. By default, the callback will send the `api_secret` value located in your company settings page. However if the `POST` request contains an `api_secret` then that `api_secret` will be used in the callback. This is an optional parameter.
+`api_secret`: When split(able) sends the callback, it will contain this parameter. By default, the callback will send the `api_secret` value located in your company settings page. However if the `POST` request contains an `api_secret` then that `api_secret` will be used in the callback. This is an optional parameter.
 
-* `expires_in`: This parameter indicates how many hours a split will remain open, i.e. 24, 48, or 72. If no value is passed, the default will be 120 hours (5 days). If expires_in value is non-numeric, or greater than 120 hours, then the value passed will be ignored, no error will be raised, and the value will be set to default. The value of this parameter must be an integer. This is an optional parameter. 
+`expires_in`: This parameter indicates how many hours a split will remain open, i.e. 24, 48, or 72. If no value is passed, the default will be 120 hours (5 days). If expires_in value is non-numeric, or greater than 120 hours, then the value passed will be ignored, no error will be raised, and the value will be set to default. The value of this parameter must be an integer. This is an optional parameter. 
 
-* `shipping`: This field indicates the total shipping cost to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
+`shipping`: This field indicates the total shipping cost to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
 
-* `tax`: This field indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
+`tax`: This field indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
 
 The response is the url to which you should redirect your user - it is the payment hub for the split.
 
