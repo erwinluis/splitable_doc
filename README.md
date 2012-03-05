@@ -3,19 +3,19 @@
 
 ## Checkout with split(able)
 
-With `checkout with split(able)` your customers can split the total amount directly from a checkout page. It works similar to `checkout with paypal`.
+With `checkout with split(able)`, your customers can split the cost of a total amount with their friends. It integrates directly with your checkout page.
 
 ### How it works
 
-* User clicks on a button or takes an action to indicate the user wants to split the amount.
-* Browser sends a request (GET or POST) reques to the store server.
-* Store server sends a `POST` request to split(able) with valid `api_key`, `total_amount` and other required parameters.
-* User sees split(able) website with the line items and the total amount that is being split among friends.
-* User invites friends to split the total cost.
-* Invited users pay their share.
-* When everyone pays then the split(able) sends a callback to the client site indicating that everyone has paid.
-* The callback includes invoice and the api_secret to prevent and forgery.
-* In case everyone does not pay and time lapses then callback will indicate that the team was cancelled.
+* Your customers selects split(able) as their payment option.
+* Browser sends a `GET or POST` request to the your server.
+* Your server sends a `POST` request to split(able) with valid `api_key`, `total_amount` and other required parameters.
+* User is redirected to split(able)'s payment hub which displays the line items and total amount to be split.
+* User invites friends and pays an amount toward the total cost.
+* Each invitee receives an invitation with a unique link to the payment hub.
+* From the invitation link, invitees are automatically signed in and prompted to pay toward the total amount.
+* When the total amount is paid, within the given time frame, split(able) sends a callback to your server indicating that the split was successful.
+* If the total amount is not reached and the given time frame has elapsed, the callback will indicate that the team was cancelled.
 
 ### Getting api_key
 
@@ -26,7 +26,7 @@ In order to checkout with split(able), client needs to do following things:
 
 ### Sending the request
 
-When a user clicks on `checkout with split(able)` then a `POST` request should be made to `https://splitable.com/api/splits` with following parameters.
+When a user clicks on `checkout with split(able)` then a `POST` request should be made to `https://www.splitable.com/api/splits` with following parameters.
 
 `POST - https://acme.splitable.com/api/splits`
 
