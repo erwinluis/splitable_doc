@@ -72,25 +72,31 @@ Sample error response:
     
 ### Multiple line items
 
-Since split(able) supports multiple line items given below is an example of two line items. split(able) supports upto 20 line items for each order. An order with zero line item will be rejected.
+Split(able) supports multiple line items. Below are the parameters for passing line items. An order with zero line items will be rejected.
 
-* item_name_1: This is a required parameter. This field is used to display the title of the item for which money is being split.
-* quantity_1: This is a required parameter. This field indicates the number of the products being purchased.
-* amount_1: This is a required parameter. This field indicates the price of the product in cents. Please note that the amount should be in *cents* .
-* url_1: This is an optional field. This field indicates the url of the product where user can go to see more details about the product.
+`item_name_1`: This is the title of the item. This is a required parameter.
 
-Similarly the keys for the second line item will be: item_name_2, quantity_2, amount_2.
+`quantity_1`: This is the quantity of the item. This is a required parameter.
 
-Similarly the keys for the third line item will be: item_name_3, quantity_3, amount_3.
+`amount_1`: This is the unit price of the item, *in cents*. Again, please note that the amount should be in *cents*. This is a required parameter. 
+
+`url_1`: This is the url of the item, where a user can view more details about the item. This is an optional field.
+
+Similarly, the keys for the second line item will be: `item_name_2`, `quantity_2`, `amount_2`, `url_2`.
+
+The keys for the third line item will be: `item_name_3`, `quantity_3`, `amount_3`, `url_3`.
 
 ### Callback/Webhook
 
-When everyone in team pays or when team is cancelled because everyone did not pay within the allotted time then split(able) makes a callback to the client site. The url that is used for callback is the `api_notify_url` that the client provided while signing up for the api services.
+When the split has been successfully paid, or the split is cancelled, split(able) makes a callback to your site. The URL for that callback is the `api_notify_url` that you provided (above).
 
-* invoice: This is the same value that client passed to split(able) when it made `POST` request.
-* payment_status: This value will be either `paid` or `cancelled`. `paid` means each team member's credit card has been captured. `cancelled` means the team could not pay within the allocated time frame.
-* api_secret: This is to prevent forgery. Usually this value is taken from the company settings. However if the `POST` request contained `api_secret` then that value is used.
-* transaction_id: This is so that you have a unique transaction_id in your system regarding this transaction. Also if merchant needs to contact split(able) regarding the payment then this value would be required. This parameter is also required for issuing refund.
+`invoice`: This is the same value passed to split(able) in the `POST` request (above).
+
+`payment_status`: This value will be either `paid` or `cancelled`. `paid` means each team member's credit card has been captured. `cancelled` means the team didn't reach the total amount within given time frame.
+
+`api_secret`: The default callback `api_secret` is located in your company settings page. However, if the `POST` request (above) contains a different `api_secret`, then that `api_secret` will be used in the callback. This is to prevent forgery. This is an optional parameter.
+
+`transaction_id`: This is so you may have a unique `transaction_id` in your system regarding this transaction. Split(able) will ask for this `transaction_id` if you need to contact us. This parameter is also required for issuing a refund.
 
 Please note that a callback is always a `POST` request.
 
