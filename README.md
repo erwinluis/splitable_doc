@@ -17,16 +17,16 @@ With `checkout with split(able)`, your customers can split the cost of a total a
 * When the total amount is paid, within the given time frame, split(able) sends a callback to your server indicating that the split was successful.
 * If the total amount is not reached and the given time frame has elapsed, the callback will indicate that the team was cancelled.
 
-### Getting api_key
+### How to get your api_key
 
 In order to checkout with split(able), client needs to do following things:
 
-* Register your company with split(able).
+* [Register](https://www.splitable.com/users/sign_up) your company with split(able).
 * Go to company settings page and make a note of `api_key` value.
 
-### Sending the request
+### Create a Split
 
-When a user clicks on `checkout with split(able)` then a `POST` request should be made to `https://www.splitable.com/api/splits` with following parameters.
+When a user selects to `checkout with split(able)` then a `POST` request should be made to `https://acme.splitable.com/api/splits` with following parameters:
 
 `POST - https://acme.splitable.com/api/splits`
 
@@ -37,27 +37,37 @@ When a user clicks on `checkout with split(able)` then a `POST` request should b
       "api_secret": "8c7834351d781964",
       "expires_in": "48",
       "shipping": "1000",
-      "tax": "5000",
+      "tax": "5000"
     }
 
-* api_key : This is a *required* parameter. This field is used to ensure that it is an authentic request and not a forgery.
-* invoice : This is a *required* parameter. Usually it is order id. It is a way for the store to track for which order user wants to split the amount.
-* api_notify_url : This is a *required* parameter. This is the url to which callback will be invoked. More information about callback is given below.
-* total_amount : This is a *required* parameter. Total amount that needs to be split should be sent *in cents*. Again please note that the value for this field should be in cents.
-* api_secret : This is an optional parameter. When split(able) sends the callbacks then the callback will contain a parameter called api_secret. Usually the callback will send the api_secret value that is registered at the company level. However if the GET request sends api_secret then that api_secret will be used in the callback.
-* expires_in : This is an optional parameter. The value for this value should be an integer. This field indicates how many hours is allowed for a team to close. Typically client should pass 48 or 72. If no value is passed then by default 5 days are allowed for a team to close. If expires_in value is non numeric then no error will be raised. In that case it would be assumed as if no expires_in value is passed. If expires_in value is greater than 120 hours then the value will be ignored and no error will be raised.
-* shipping : This is an optional parameter. This field indicates the shipping cost to be shown. Please note that value must be in cents.
-* tax : This is an optional parameter. This field indicates the tax to be shown. Please note that value must be in cents.
+* `api_key`: This field is used to ensure that it is an authentic request. This is a *required* parameter. 
+
+* `invoice`: An identifier from your site to keep track of what will be split, often represented as an order id. This is a *required* parameter.
+
+* `api_notify_url`: This is the callback url which split(able) will use to notify your site if a split is successful or not. More information about the callback is given below. This is a *required* parameter.
+
+* `total_amount`: This is the total amount to be split. The value for this parameter must be *in cents*. Again, please note that this value must be *in cents*. This is a *required* parameter.
+
+* `api_secret`: When split(able) sends the callback, it will contain this parameter. By default, the callback will send the `api_secret` value located in your company settings page. However if the `POST` request contains an `api_secret` then that `api_secret` will be used in the callback. This is an optional parameter.
+
+* `expires_in`: This parameter indicates how many hours a split will remain open, i.e. 24, 48, or 72. If no value is passed, the default will be 120 hours (5 days). If expires_in value is non-numeric, or greater than 120 hours, then the value passed will be ignored, no error will be raised, and the value will be set to default. The value of this parameter must be an integer. This is an optional parameter. 
+
+* `shipping`: This field indicates the total shipping cost to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
+
+* `tax`: This field indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
+
+The response is the url to which you should redirect your user - it is the payment hub for the split.
 
 The response of the request is always a JSON structure.
 
-In case of success the JSON might look like this
+Success:
 
-    { success: "https://yourcompanyname.splitable.com/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team"}
+    { success: "https://yourcompanyname.splitable.com/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team" }
 
-In case of error the JSON might look like this
+Error:
 
     { error: "api_key is missing" }
+    
 ### Multiple line items
 
 Since split(able) supports multiple line items given below is an example of two line items. split(able) supports upto 20 line items for each order. An order with zero line item will be rejected.
