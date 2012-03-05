@@ -56,6 +56,8 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
 
 `tax`: This field indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
 
+#### Create a Split Response
+
 The response is the url to which you should redirect your user - it is the payment hub for the split.
 
 The response of the request is always a JSON structure.
