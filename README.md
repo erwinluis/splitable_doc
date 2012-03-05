@@ -26,9 +26,9 @@ In order to checkout with split(able), client needs to do following things:
 
 ### Create a Split
 
-When a user selects to `checkout with split(able)` then a `POST` request should be made to `https://acme.splitable.com/api/splits` with following parameters:
+When a user selects to `checkout with split(able)` then a `POST` request should be made to `https://yourcompany.splitable.com/api/splits` with following parameters:
 
-`POST - https://acme.splitable.com/api/splits`
+`POST - https://yourcompany.splitable.com/api/splits`
 
     { "api_key": "69f46e9fbc67a916",
       "invoice": "1234",
@@ -60,11 +60,11 @@ The response is the url to which you should redirect your user - it is the payme
 
 The response of the request is always a JSON structure.
 
-Success:
+Sample success response:
 
     { success: "https://yourcompanyname.splitable.com/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team" }
 
-Error:
+Sample error response:
 
     { error: "api_key is missing" }
     
