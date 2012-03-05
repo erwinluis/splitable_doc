@@ -3,7 +3,7 @@
 
 ## Checkout with split(able)
 
-`checkout with split(able)` gives store owners the ability to allow their customers to split the total cost with friends directly from a checkout page. It works pretty similar to `checkout with paypal`.
+`checkout with split(able)` gives store owners the ability to allow their customers to split the total amount with friends directly from a checkout page. It works pretty similar to `checkout with paypal`.
 
 ### How it works
 
