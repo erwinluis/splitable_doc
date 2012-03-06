@@ -37,7 +37,15 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
       "api_secret": "8c7834351d781964",
       "expires_in": "48",
       "shipping": "1000",
-      "tax": "5000"
+      "tax": "4000",
+      "item_name_1": "Essential Calculus Book",
+      "quantity_1": "1",
+      "amount_1": "20000",
+      "url_1": "http://www.yourcompany.com/products/essential-calculus-book",
+      "item_name_2": "Marine Biology Book",
+      "quantity_2": "1",
+      "amount_2": "10000",
+      "url_2": "http://www.yourcompany.com/products/marine-biology-book"
     }
 
 `api_key`: This field is used to ensure that it is an authentic request. This is a *required* parameter. 
@@ -56,20 +64,6 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
 
 `tax`: This field indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
 
-#### Create a Split Response
-
-The response is the url to which you should redirect your user - it is the payment hub for the split.
-
-The response of the request is always a JSON structure.
-
-Sample success response:
-
-    { success: "https://yourcompanyname.splitable.com/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team" }
-
-Sample error response:
-
-    { error: "api_key is missing" }
-    
 ### Multiple line items
 
 Split(able) supports multiple line items. Below are the parameters for passing line items. An order with zero line items will be rejected.
@@ -86,6 +80,21 @@ Similarly, the keys for the second line item will be: `item_name_2`, `quantity_2
 
 The keys for the third line item will be: `item_name_3`, `quantity_3`, `amount_3`, `url_3`.
 
+### Create a Split Response
+
+The response is the url to which you should redirect your user - it is the payment hub for the split.
+
+The response of the request is always a JSON structure.
+
+Sample success response:
+
+    { success: "https://yourcompanyname.splitable.com/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team" }
+
+Sample error response:
+
+    { error: "api_key is missing" }
+
+
 ### Callback/Webhook
 
 When the split has been successfully paid, or the split is cancelled, split(able) makes a callback to your site. The URL for that callback is the `api_notify_url` that you provided (above).
@@ -100,7 +109,7 @@ When the split has been successfully paid, or the split is cancelled, split(able
 
 Please note that a callback is always a `POST` request.
 
-In order to ensure that client has indeed received the callback split(able) checks the http resonse code for the callback made. If the response code is not `200` then split(able) will make another attempt to make the callback in increasing order of time. In total split(able) will make 25 attempts and the distribution of those 25 attempts is given below.
+To ensure that you've received the callback, split(able) checks the http response code for the callback made. If the response code is not `200` then split(able) will make another attempt to make the callback in increasing order of time. In total, split(able) will make 25 attempts, and the distribution of those 25 attempts is given below.
 
     1st attempt : less than a minute
     2nd attempt : less than a minute
@@ -130,7 +139,7 @@ In order to ensure that client has indeed received the callback split(able) chec
 
 ### Code in Ruby
 
-`Checkout with split(able)` does not depend on any language. The http `POST` request can be made in any lanauge. We at Splitable.com use `ruby` as programming language. Here are some code snippets which might help you understand the API better.
+`Checkout with split(able)` does not depend on any language. The http `POST` request can be made in any lanauge. We at split(able) use `ruby` as the programming language. Here are some code snippets which might help you understand the API better.
 
 Below is an example of `POST` request being sent to `https://www.splitable.com/api/splits` and the response is being parsed.
 
@@ -144,6 +153,6 @@ Below is an example of `POST` request being sent to `https://www.splitable.com/a
     response = conn.post '/api/splits', options
     data = ActiveSupport::JSON.decode(response.body)
 
-Below is an exampel of how ruby code can respond `200` to the callback made by split(able).
+Below is an example of how ruby code can respond `200` to the callback made by split(able).
 
     render nothing: true, status: 200
