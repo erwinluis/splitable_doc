@@ -5,10 +5,12 @@
 
 With `checkout with split(able)`, your customers can split the cost of a total amount with their friends. It integrates directly with your checkout page.
 
+Watch a video of how split(able) works from a checkout page: (http://vimeo.com/37293414)
+
 ### How it works
 
 * Your customers selects split(able) as their payment option.
-* Browser sends a `GET or POST` request to the your server.
+* Browser sends a `GET or POST` request to your server.
 * Your server sends a `POST` request to split(able) with valid `api_key`, `total_amount` and other required parameters.
 * User is redirected to split(able)'s payment hub which displays the line items and total amount to be split.
 * User invites friends and pays an amount toward the total cost.
@@ -19,7 +21,7 @@ With `checkout with split(able)`, your customers can split the cost of a total a
 
 ### How to get your api_key
 
-In order to checkout with split(able), client needs to do following things:
+In order to use checkout with split(able), you need to:
 
 * [Register](https://www.splitable.com/users/sign_up) your company with split(able).
 * Go to company settings page and make a note of `api_key` value.
