@@ -82,7 +82,7 @@ Similarly, the keys for the second line item will be: `item_name_2`, `quantity_2
 
 The keys for the third line item will be: `item_name_3`, `quantity_3`, `amount_3`, `url_3`.
 
-### Create a Split Response
+### Response from creating a split
 
 The response is the url to which you should redirect your user - it is the payment hub for the split.
 
