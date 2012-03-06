@@ -5,7 +5,7 @@
 
 With `checkout with split(able)`, your customers can split the cost of a total amount with their friends. It integrates directly with your checkout page.
 
-Watch a video of how split(able) works from a checkout page: http://vimeo.com/37293414
+Watch a video of how split(able) works with a shopping cart: http://vimeo.com/37293414
 
 ### How it works
 
