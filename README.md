@@ -158,3 +158,7 @@ Below is an example of `POST` request being sent to `https://www.splitable.com/a
 Below is an example of how ruby code can respond `200` to the callback made by split(able).
 
     render nothing: true, status: 200
+
+### Contact Us
+
+We are constantly working on improvements and releasing new features. Please reach out to us with any questions at hello@splitable.com.
