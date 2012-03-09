@@ -1,4 +1,4 @@
-![Splitable](https://www.splitable.com/images/logo.png?1327850834)
+![Splitable](https://www.splitable.com/assets/logo.png?1327850834)
 
 
 ## Checkout with split(able)
