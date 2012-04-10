@@ -87,13 +87,16 @@ The keys for the third line item will be: `item_name_3`, `quantity_3`, `amount_3
 
 ### Response from creating a split
 
-The response is the url to which you should redirect your user - it is the payment hub for the split.
+The response is a JSON object with two keys: split_url and split_id.
+
+The split_url is the url to which you should redirect your user - it is the payment hub for the split.
 
 The response of the request is always a JSON structure.
 
 Sample success response:
 
-    { success: "https://yourcompanyname.splitable.com/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team" }
+    { split_url: "https://yourcompanyname.splitable.com/splits/4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c/team",
+      split_id:  "4e284f631c3b1633996fc1f8fb7f8278a80065ec4d53d5b3ed1c"  }
 
 Sample error response:
 
