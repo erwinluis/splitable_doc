@@ -23,7 +23,7 @@ Watch a video of how split(able) works with a shopping cart: http://vimeo.com/37
 
 In order to use checkout with split(able), you need to:
 
-* [Register](https://www.splitable.com/users/sign_up) your company with split(able).
+* [Register](https://www.splitable.com/sign_up) your company with split(able).
 * Go to company settings page and make a note of `api_key` value.
 
 ### Create a Split
