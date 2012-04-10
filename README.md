@@ -40,6 +40,7 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
       "expires_in": "48",
       "shipping": "1000",
       "tax": "4000",
+      "description": "Campus books has the best selection of educational books in the market.",
       "item_name_1": "Essential Calculus Book",
       "quantity_1": "1",
       "amount_1": "20000",
@@ -50,7 +51,7 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
       "url_2": "http://www.yourcompany.com/products/marine-biology-book"
     }
 
-`api_key`: This field is used to ensure that it is an authentic request. This is a *required* parameter. 
+`api_key`: This parameter is used to ensure that it is an authentic request. This is a *required* parameter. 
 
 `invoice`: An identifier from your site to keep track of what will be split, often represented as an order id. This is a *required* parameter.
 
@@ -62,9 +63,11 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
 
 `expires_in`: This parameter indicates how many hours a split will remain open, i.e. 24, 48, or 72. If no value is passed, the default will be 120 hours (5 days). If expires_in value is non-numeric, or greater than 120 hours, then the value passed will be ignored, no error will be raised, and the value will be set to default. The value of this parameter must be an integer. This is an optional parameter. 
 
-`shipping`: This field indicates the total shipping cost to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
+`shipping`: This parameter indicates the total shipping cost to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
 
-`tax`: This field indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
+`tax`: This parameter indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
+
+`description`: This parameter is used to describe the split. The description maps to a text area, which is displayed on the split page. This is an optional parameter.
 
 ### Multiple line items
 
