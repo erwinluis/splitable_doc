@@ -69,6 +69,28 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
 
 `description`: This parameter is used to describe the split. The description maps to a text area, which is displayed on the split page. This is an optional parameter.
 
+## A working curl statement to create a split using api
+
+```
+ curl https://nimbleshop.splitable.com/api/splits \
+       -d api_key=92746e4d66cb8993 \
+       -d invoice=3789273937239273 \
+       -d "api_notify_url=http://www.acme.com/instant_payment_notification/splitable" \
+       -d total_amount=35000 \
+       -d exires_in=48 \
+       -d shipping=1000 \
+       -d tax=4000 \
+       -d "description=Campus books has the best selection of educational books in the market" \
+       -d "item_name_1=Essential Calculus Book" \
+       -d quantity_1=1 \
+       -d amount_1=20000 \
+       -d "url_1=http://www.yourcompany.com/products/essential-calculus-book" \
+       -d "item_name_2=Marine Biology Book" \
+       -d amount_2=10000 \
+       -d quantity_2=1 \
+       -d "url_2=http://www.yourcompany.com/products/marine-biology-book"
+```
+
 ### Multiple line items
 
 Split(able) supports multiple line items. Below are the parameters for passing line items. An order with zero line items will be rejected.
