@@ -69,7 +69,7 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
 
 `description`: This parameter is used to describe the split. The description maps to a text area, which is displayed on the split page. This is an optional parameter.
 
-## A working curl statement to create a split using api
+### curl request to create a split
 
 ```
  curl https://nimbleshop.splitable.com/api/splits \
