@@ -126,6 +126,19 @@ Sample error response:
        -d "url_2=http://www.yourcompany.com/products/marine-biology-book"
 ```
 
+### Request to get the email address and names of all paid users
+
+In order to get the list of all users who have paid for a given split
+you can make a `GET` request as given in the following curl
+
+```
+curl https://nimbleshop.splitable-draft.com/api/splits/d8c1f41e9be8758dfa7099fc58e4798d7a3e7a123e8d6f116519/paid_members?api_key=92746e4d66cb8993
+```
+
+`api_key`: This parameter is used to ensure that it is an authentic request. This is a *required* parameter. 
+
+`split_id`: split_id is needed to uniquely identify the split.
+
 ### Callback/Webhook
 
 When the split has been successfully paid, or the split is cancelled, split(able) makes a callback to your site. The URL for that callback is the `api_notify_url` that you provided (above).
