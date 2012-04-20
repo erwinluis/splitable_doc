@@ -129,15 +129,24 @@ Sample error response:
 ### Request to get the email address and names of all paid users
 
 In order to get the list of all users who have paid for a given split
-you can make a `GET` request as given in the following curl
+you can make a `GET` request
+
+`GET - https://nimbleshop.splitable.com/api/splits/split_id/paid_members.json?api_key=xxxxxxxx`
+
+as given in the following curl
 
 ```
-curl https://nimbleshop.splitable-draft.com/api/splits/d8c1f41e9be8758dfa7099fc58e4798d7a3e7a123e8d6f116519/paid_members?api_key=92746e4d66cb8993
+curl https://nimbleshop.splitable.com/api/splits/e0deafc66991a1b32a0a31e0f010b704b828cd19b8c2345c9bba/paid_members.json?api_key=92746e4d66cb8993
 ```
 
 `api_key`: This parameter is used to ensure that it is an authentic request. This is a *required* parameter. 
 
 `split_id`: split_id is needed to uniquely identify the split.
+
+Sample success response:
+
+    {"name":"FirstName LastName","email":"email@example.com"}
+    
 
 ### Callback/Webhook
 
