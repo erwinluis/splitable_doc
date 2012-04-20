@@ -131,9 +131,9 @@ Sample error response:
 In order to get the list of all users who have paid for a given split
 you can make a `GET` request
 
-`GET - https://nimbleshop.splitable.com/api/splits/split_id/paid_members.json?api_key=xxxxxxxx`
+`GET - https://yourcompany.splitable.com/api/splits/split_id/paid_members.json?api_key=xxxxxxxx`
 
-as given in the following curl
+as given in the following curl example:
 
 ```
 curl https://nimbleshop.splitable.com/api/splits/e0deafc66991a1b32a0a31e0f010b704b828cd19b8c2345c9bba/paid_members.json?api_key=92746e4d66cb8993
