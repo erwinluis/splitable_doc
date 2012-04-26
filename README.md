@@ -87,7 +87,7 @@ Sample error response:
     { error: "api_key is missing" }
 
 
-### an example using curl
+### An example using curl
 
 ```
  curl https://nimbleshop.splitable.com/api/splits \
@@ -149,7 +149,7 @@ curl https://nimbleshop.splitable-draft.com/api/splits/d8c1f41e9be8758dfa7099fc5
 ```
 
 
-## Callback/Webhook from split closes
+## Callback/Webhook from Splitable
 
 When the split has been successfully paid, or the split is cancelled, split(able) makes a callback to your site. The URL for that callback is the `api_notify_url` that you provided (above).
 
@@ -166,7 +166,7 @@ parameters.
 
 `transaction_id`: This is so you may have a unique `transaction_id` in your system regarding this transaction. Split(able) will ask for this `transaction_id` if you need to contact us. This parameter is also required for issuing a refund.
 
-### Client must acknowledge the callback
+### Client acknowledgement
 
 To ensure that you've received the callback, split(able) checks the http response code for the callback made. If the response code is not `200` then split(able) will make another attempt to make the callback in increasing order of time. In total, split(able) will make 25 attempts, and the distribution of those 25 attempts is given below.
 
@@ -196,7 +196,7 @@ To ensure that you've received the callback, split(able) checks the http respons
     24th attempt : 4 days
     25th attempt : 5 days
 
-### Contact Us
+## Contact Us
 
 We are constantly working on improvements and releasing new features. Please reach out to us with any questions at hello@splitable.com.
 
