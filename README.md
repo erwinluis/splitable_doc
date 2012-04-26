@@ -7,7 +7,7 @@ With Split(able) API, your customers can split the cost of a total amount with t
 
 Watch a video of how Split(able) works with a shopping cart: http://vimeo.com/37293414
 
-## Split(able) Merchant Processing
+### Split(able) Merchant Processing
 
 Split(able) is the default merchant processor. If you'd like Split(able) to tap into your payment gateway and merchant account, please write us an email at hello@splitable.com. 
 Fees for using Split(able) can be found in the Merchant Agreement: https://www.splitable.com/ma
