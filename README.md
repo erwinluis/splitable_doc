@@ -109,6 +109,10 @@ Sample error response:
        -d "url_2=http://www.yourcompany.com/products/marine-biology-book"
 ```
 
+Please note that in the above example `nimbleshop` is the company
+subdomain. You should use your compan's subdomain instead of
+'nimbleshop' when you are using the API.
+
 ### An example using Ruby
 
 Spltiable API can be used in any language. The http `POST` request can be made in any lanauge. We at split(able) use `ruby` as the programming language. Here are some code snippets which might help you understand the API better.
@@ -148,6 +152,9 @@ Make a `GET` request with following parameters:
 curl https://nimbleshop.splitable-draft.com/api/splits/d8c1f41e9be8758dfa7099fc58e4798d7a3e7a123e8d6f116519/paid_members?api_key=92746e4d66cb8993
 ```
 
+Please note that in the above example `nimbleshop` is the company
+subdomain. You should use your compan's subdomain instead of
+'nimbleshop' when you are using the API.
 
 ## Callback/Webhook from Splitable
 
