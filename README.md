@@ -1,16 +1,16 @@
 ![Splitable](https://www.splitable.com/assets/logo.png?1327850834)
 
 
-## Split(able) API
+## split(able) API
 
-With Split(able) API, your customers can split the cost of a total amount with their friends. It integrates directly with your checkout page.
+With split(able) API, your customers can split the cost of a total amount with their friends.
 
-Watch a video of how Split(able) works with a shopping cart: http://vimeo.com/37293414
+split(able) easily integrates directly with your checkout page and can be set to use your existing payment gateway.  split(able) also offers a full stack payment solution, where you don't need a payment gateway or merchant account.
 
-### Split(able) Merchant Processing
-
-Split(able) is the default merchant processor. If you'd like Split(able) to tap into your payment gateway and merchant account, please write us an email at hello@splitable.com. 
+If you'd like split(able) to tap into your payment gateway and merchant account, please write us an email at hello@splitable.com. 
 Fees for using Split(able) can be found in the Merchant Agreement: https://www.splitable.com/ma
+
+Watch a video of how split(able) works with a shopping cart: http://vimeo.com/37293414
 
 ### How it works
 
