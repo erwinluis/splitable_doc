@@ -1,9 +1,9 @@
 ![Splitable](https://www.splitable.com/assets/logo.png?1327850834)
 
 
-## Checkout with split(able)
+## Splitable API
 
-With `checkout with split(able)`, your customers can split the cost of a total amount with their friends. It integrates directly with your checkout page.
+With Splitable API, your customers can split the cost of a total amount with their friends. It integrates directly with your checkout page.
 
 Watch a video of how split(able) works with a shopping cart: http://vimeo.com/37293414
 
@@ -21,37 +21,20 @@ Watch a video of how split(able) works with a shopping cart: http://vimeo.com/37
 
 ### How to get your api_key
 
-In order to use checkout with split(able), you need to:
+In order to use Splitable API, you need to:
 
 * [Register](https://www.splitable.com/sign-up) your company with split(able).
 * Go to company settings page and make a note of `api_key` value.
 
-### Create a Split
+### Creating a Split
 
-When a user selects to `checkout with split(able)` then a `POST` request should be made to `https://yourcompany.splitable.com/api/splits` with following parameters:
+Using this api you can create a split.
 
-`POST - https://yourcompany.splitable.com/api/splits`
+### Parameters
 
-    { "api_key": "69f46e9fbc67a916",
-      "invoice": "1234",
-      "api_notify_url": "http://www.acme.com/instant_payment_notification/splitable",
-      "total_amount": "35000",
-      "api_secret": "8c7834351d781964",
-      "expires_in": "48",
-      "shipping": "1000",
-      "tax": "4000",
-      "description": "Campus books has the best selection of educational books in the market.",
-      "item_name_1": "Essential Calculus Book",
-      "quantity_1": "1",
-      "amount_1": "20000",
-      "url_1": "http://www.yourcompany.com/products/essential-calculus-book",
-      "item_name_2": "Marine Biology Book",
-      "quantity_2": "1",
-      "amount_2": "10000",
-      "url_2": "http://www.yourcompany.com/products/marine-biology-book"
-    }
+In order to create a split send `POST` request to `https://yourcompany.splitable.com/api/splits` with following parameters:
 
-`api_key`: This parameter is used to ensure that it is an authentic request. This is a *required* parameter. 
+`api_key`: This parameter is used to ensure that it is an authentic request. This is a *required* parameter.
 
 `invoice`: An identifier from your site to keep track of what will be split, often represented as an order id. This is a *required* parameter.
 
@@ -61,11 +44,11 @@ When a user selects to `checkout with split(able)` then a `POST` request should 
 
 `api_secret`: When split(able) sends the callback, it will contain this parameter. By default, the callback will send the `api_secret` value located in your company settings page. However if the `POST` request contains an `api_secret` then that `api_secret` will be used in the callback. This is an optional parameter.
 
-`expires_in`: This parameter indicates how many hours a split will remain open, i.e. 24, 48, or 72. If no value is passed, the default will be 120 hours (5 days). If expires_in value is non-numeric, or greater than 120 hours, then the value passed will be ignored, no error will be raised, and the value will be set to default. The value of this parameter must be an integer. This is an optional parameter. 
+`expires_in`: This parameter indicates how many hours a split will remain open, i.e. 24, 48, or 72. If no value is passed, the default will be 120 hours (5 days). If expires_in value is non-numeric, or greater than 120 hours, then the value passed will be ignored, no error will be raised, and the value will be set to default. The value of this parameter must be an integer. This is an optional parameter.
 
 `shipping`: This parameter indicates the total shipping cost to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
 
-`tax`: This parameter indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter. 
+`tax`: This parameter indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter.
 
 `description`: This parameter is used to describe the split. The description maps to a text area, which is displayed on the split page. This is an optional parameter.
 
@@ -78,7 +61,7 @@ Split(able) supports multiple line items. Below are the parameters for passing l
 
 `quantity_1`: This is the quantity of the item. This is a required parameter.
 
-`amount_1`: This is the unit price of the item, *in cents*. Again, please note that the amount should be in *cents*. This is a required parameter. 
+`amount_1`: This is the unit price of the item, *in cents*. Again, please note that the amount should be in *cents*. This is a required parameter.
 
 `url_1`: This is the url of the item, where a user can view more details about the item. This is an optional field.
 
@@ -104,7 +87,7 @@ Sample error response:
     { error: "api_key is missing" }
 
 
-### curl request to create a split
+### an example using curl
 
 ```
  curl https://nimbleshop.splitable.com/api/splits \
@@ -126,31 +109,54 @@ Sample error response:
        -d "url_2=http://www.yourcompany.com/products/marine-biology-book"
 ```
 
-### Request to get the email address and names of all paid users
+### An example in Ruby
 
-In order to get the list of all users who have paid for a given split
-you can make a `GET` request
+`Checkout with split(able)` does not depend on any language. The http `POST` request can be made in any lanauge. We at split(able) use `ruby` as the programming language. Here are some code snippets which might help you understand the API better.
 
-`GET - https://yourcompany.splitable.com/api/splits/split_id/paid_members.json?api_key=xxxxxxxx`
+Below is an example of `POST` request being sent to `https://www.splitable.com/api/splits` and the response is being parsed.
 
-as given in the following curl example:
+    conn = Faraday.new(:url => 'https://www.splitable.com') do |builder|
+      builder.use Faraday::Request::UrlEncoded  # convert request params as "www-form-urlencoded"
+      builder.use Faraday::Response::Logger     # log the request to STDOUT
+      builder.use Faraday::Adapter::NetHttp     # make http requests with Net::HTTP
+    end
 
-```
-curl https://nimbleshop.splitable.com/api/splits/e0deafc66991a1b32a0a31e0f010b704b828cd19b8c2345c9bba/paid_members.json?api_key=92746e4d66cb8993
-```
+    options = base_data(order, request).merge(line_items_data(order, request))
+    response = conn.post '/api/splits', options
+    data = ActiveSupport::JSON.decode(response.body)
 
-`api_key`: This parameter is used to ensure that it is an authentic request. This is a *required* parameter. 
+Below is an example of how ruby code can respond `200` to the callback made by split(able).
+
+    render nothing: true, status: 200
+
+## Request to get the email address and names of all paid users
+
+This api allows you to get the list of name and email of the people who
+have paid towards the split.
+
+### Parameters
+
+Make a `GET` request with following parameters:
+
+`api_key`: This parameter is used to ensure that it is an authentic request. This is a *required* parameter.
 
 `split_id`: split_id is needed to uniquely identify the split.
 
-Sample success response:
+### An example using curl
 
-    {"name":"FirstName LastName","email":"email@example.com"}
-    
+```
+curl https://nimbleshop.splitable-draft.com/api/splits/d8c1f41e9be8758dfa7099fc58e4798d7a3e7a123e8d6f116519/paid_members?api_key=92746e4d66cb8993
+```
 
-### Callback/Webhook
+
+### Callback/Webhook from split closes
 
 When the split has been successfully paid, or the split is cancelled, split(able) makes a callback to your site. The URL for that callback is the `api_notify_url` that you provided (above).
+
+### Parameters
+
+Splitable will make a `POST` request to the callback url with following
+parameters.
 
 `invoice`: This is the same value passed to split(able) in the `POST` request (above).
 
@@ -160,7 +166,7 @@ When the split has been successfully paid, or the split is cancelled, split(able
 
 `transaction_id`: This is so you may have a unique `transaction_id` in your system regarding this transaction. Split(able) will ask for this `transaction_id` if you need to contact us. This parameter is also required for issuing a refund.
 
-Please note that a callback is always a `POST` request.
+### Client must acknowledge the callback
 
 To ensure that you've received the callback, split(able) checks the http response code for the callback made. If the response code is not `200` then split(able) will make another attempt to make the callback in increasing order of time. In total, split(able) will make 25 attempts, and the distribution of those 25 attempts is given below.
 
@@ -190,26 +196,9 @@ To ensure that you've received the callback, split(able) checks the http respons
     24th attempt : 4 days
     25th attempt : 5 days
 
-### Code in Ruby
 
-`Checkout with split(able)` does not depend on any language. The http `POST` request can be made in any lanauge. We at split(able) use `ruby` as the programming language. Here are some code snippets which might help you understand the API better.
-
-Below is an example of `POST` request being sent to `https://www.splitable.com/api/splits` and the response is being parsed.
-
-    conn = Faraday.new(:url => 'https://www.splitable.com') do |builder|
-      builder.use Faraday::Request::UrlEncoded  # convert request params as "www-form-urlencoded"
-      builder.use Faraday::Response::Logger     # log the request to STDOUT
-      builder.use Faraday::Adapter::NetHttp     # make http requests with Net::HTTP
-    end
-
-    options = base_data(order, request).merge(line_items_data(order, request))
-    response = conn.post '/api/splits', options
-    data = ActiveSupport::JSON.decode(response.body)
-
-Below is an example of how ruby code can respond `200` to the callback made by split(able).
-
-    render nothing: true, status: 200
 
 ### Contact Us
 
 We are constantly working on improvements and releasing new features. Please reach out to us with any questions at hello@splitable.com.
+
