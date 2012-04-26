@@ -7,9 +7,6 @@ With split(able) API, your customers can split the cost of a total amount with t
 
 split(able) easily integrates directly with your checkout page and can be set to use your existing payment gateway.  split(able) also offers a full stack payment solution, where you don't need a payment gateway or merchant account.
 
-If you'd like split(able) to tap into your payment gateway and merchant account, please write us an email at hello@splitable.com. 
-Fees for using Split(able) can be found in the Merchant Agreement: https://www.splitable.com/ma
-
 Watch a video of how split(able) works with a shopping cart: http://vimeo.com/37293414
 
 ### How it works
