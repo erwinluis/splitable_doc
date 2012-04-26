@@ -26,7 +26,7 @@ In order to use Splitable API, you need to:
 * [Register](https://www.splitable.com/sign-up) your company with split(able).
 * Go to company settings page and make a note of `api_key` value.
 
-### Creating a Split
+## Creating a Split
 
 Using this api you can create a split.
 
@@ -109,9 +109,9 @@ Sample error response:
        -d "url_2=http://www.yourcompany.com/products/marine-biology-book"
 ```
 
-### An example in Ruby
+### An example using Ruby
 
-`Checkout with split(able)` does not depend on any language. The http `POST` request can be made in any lanauge. We at split(able) use `ruby` as the programming language. Here are some code snippets which might help you understand the API better.
+Spltiable API can be used in any language. The http `POST` request can be made in any lanauge. We at split(able) use `ruby` as the programming language. Here are some code snippets which might help you understand the API better.
 
 Below is an example of `POST` request being sent to `https://www.splitable.com/api/splits` and the response is being parsed.
 
@@ -149,7 +149,7 @@ curl https://nimbleshop.splitable-draft.com/api/splits/d8c1f41e9be8758dfa7099fc5
 ```
 
 
-### Callback/Webhook from split closes
+## Callback/Webhook from split closes
 
 When the split has been successfully paid, or the split is cancelled, split(able) makes a callback to your site. The URL for that callback is the `api_notify_url` that you provided (above).
 
@@ -195,8 +195,6 @@ To ensure that you've received the callback, split(able) checks the http respons
     23rd attempt : 3 days
     24th attempt : 4 days
     25th attempt : 5 days
-
-
 
 ### Contact Us
 
