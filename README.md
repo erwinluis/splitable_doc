@@ -1,48 +1,53 @@
 ![Splitable](https://www.splitable.com/assets/logo.png?1327850834)
 
 
-## Splitable API
+## Split(able) API
 
-With Splitable API, your customers can split the cost of a total amount with their friends. It integrates directly with your checkout page.
+With Split(able) API, your customers can split the cost of a total amount with their friends. It integrates directly with your checkout page.
 
-Watch a video of how split(able) works with a shopping cart: http://vimeo.com/37293414
+Watch a video of how Split(able) works with a shopping cart: http://vimeo.com/37293414
+
+## Split(able) Merchant Processing
+
+Split(able) is the default merchant processor. If you'd like Split(able) to tap into your payment gateway and merchant account, please write us an email at hello@splitable.com. 
+Fees for using Split(able) can be found in the Merchant Agreement: https://www.splitable.com/ma
 
 ### How it works
 
-* Your customers selects split(able) as their payment option.
+* From the checkout page, your customer selects split(able) as their payment option.
 * Browser sends a `GET or POST` request to your server.
 * Your server sends a `POST` request to split(able) with valid `api_key`, `total_amount` and other required parameters.
-* User is redirected to split(able)'s payment hub which displays the line items and total amount to be split.
+* User is redirected to the split(able) payment hub, which displays the line items and total amount to be split.
 * User invites friends and pays an amount toward the total cost.
 * Each invitee receives an invitation with a unique link to the payment hub.
 * From the invitation link, invitees are automatically signed in and prompted to pay toward the total amount.
-* When the total amount is paid, within the given time frame, split(able) sends a callback to your server indicating that the split was successful.
+* When the total amount is paid within the given time frame, split(able) sends a callback to your server indicating that the split was successful.
 * If the total amount is not reached and the given time frame has elapsed, the callback will indicate that the team was cancelled.
 
 ### How to get your api_key
 
-In order to use Splitable API, you need to:
+To access the Split(able) API, you need to:
 
 * [Register](https://www.splitable.com/sign-up) your company with split(able).
 * Go to company settings page and make a note of `api_key` value.
 
 ## Creating a Split
 
-Using this api you can create a split.
+Using this API you can create a split of a total cost.
 
 ### Parameters
 
-In order to create a split send `POST` request to `https://yourcompany.splitable.com/api/splits` with following parameters:
+In order to create a split, send your `POST` request to `https://yourcompany.splitable.com/api/splits` with the following parameters:
 
 `api_key`: This parameter is used to ensure that it is an authentic request. This is a *required* parameter.
 
 `invoice`: An identifier from your site to keep track of what will be split, often represented as an order id. This is a *required* parameter.
 
-`api_notify_url`: This is the callback url which split(able) will use to notify your site if a split is successful or not. More information about the callback is given below. This is a *required* parameter.
+`api_notify_url`: This is the callback url which Split(able) will use to notify your site if a split is successful or not. More information about the callback is given below. This is a *required* parameter.
 
 `total_amount`: This is the total amount to be split. The value for this parameter must be *in cents*. Again, please note that this value must be *in cents*. This is a *required* parameter.
 
-`api_secret`: When split(able) sends the callback, it will contain this parameter. By default, the callback will send the `api_secret` value located in your company settings page. However if the `POST` request contains an `api_secret` then that `api_secret` will be used in the callback. This is an optional parameter.
+`api_secret`: When Split(able) sends the callback, it will contain this parameter. By default, the callback will send the `api_secret` value located in your company settings page. However, if the `POST` request contains an `api_secret`, then that `api_secret` will be used in the callback. This is an optional parameter.
 
 `expires_in`: This parameter indicates how many hours a split will remain open, i.e. 24, 48, or 72. If no value is passed, the default will be 120 hours (5 days). If expires_in value is non-numeric, or greater than 120 hours, then the value passed will be ignored, no error will be raised, and the value will be set to default. The value of this parameter must be an integer. This is an optional parameter.
 
@@ -50,7 +55,7 @@ In order to create a split send `POST` request to `https://yourcompany.splitable
 
 `tax`: This parameter indicates the total tax amount to be displayed. Please note that value must be *in cents*. This is an optional parameter.
 
-`description`: This parameter is used to describe the split. The description maps to a text area, which is displayed on the split page. This is an optional parameter.
+`description`: This parameter is used to describe the split or display any additional information you wish to pass. The description maps to a text area, which is displayed on the main page of the split. This is an optional parameter.
 
 
 ### Multiple line items
@@ -115,7 +120,7 @@ subdomain. You should use your compan's subdomain instead of
 
 ### An example using Ruby
 
-Spltiable API can be used in any language. The http `POST` request can be made in any lanauge. We at split(able) use `ruby` as the programming language. Here are some code snippets which might help you understand the API better.
+Split(able) API can be used in any language. The http `POST` request can be made in any lanauge. We at Split(able) use `ruby` as the programming language. Here are some code snippets which might help you understand the API better.
 
 Below is an example of `POST` request being sent to `https://www.splitable.com/api/splits` and the response is being parsed.
 
@@ -129,13 +134,13 @@ Below is an example of `POST` request being sent to `https://www.splitable.com/a
     response = conn.post '/api/splits', options
     data = ActiveSupport::JSON.decode(response.body)
 
-Below is an example of how ruby code can respond `200` to the callback made by split(able).
+Below is an example of how ruby code can respond `200` to the callback made by Split(able).
 
     render nothing: true, status: 200
 
-## Request to get the email address and names of all paid users
+## Request to get the names and email addresses of all paid users
 
-This api allows you to get the list of name and email of the people who
+This API allows you to get the names and email addresses of the people who
 have paid towards the split.
 
 ### Parameters
@@ -158,20 +163,20 @@ subdomain. You should use your compan's subdomain instead of
 
 ## Callback/Webhook from Splitable
 
-When the split has been successfully paid, or the split is cancelled, split(able) makes a callback to your site. The URL for that callback is the `api_notify_url` that you provided (above).
+When the split has been successfully paid, or the split is cancelled, Split(able) makes a callback to your site. The URL for that callback is the `api_notify_url` that you provided (above).
 
 ### Parameters
 
-Splitable will make a `POST` request to the callback url with following
+Split(able) will make a `POST` request to the callback url with following
 parameters.
 
-`invoice`: This is the same value passed to split(able) in the `POST` request (above).
+`invoice`: This is the same value passed to Split(able) in the `POST` request (above).
 
 `payment_status`: This value will be either `paid` or `cancelled`. `paid` means each team member's credit card has been captured. `cancelled` means the team didn't reach the total amount within given time frame.
 
 `api_secret`: The default callback `api_secret` is located in your company settings page. However, if the `POST` request (above) contains a different `api_secret`, then that `api_secret` will be used in the callback. This is to prevent forgery. This is an optional parameter.
 
-`transaction_id`: This is so you may have a unique `transaction_id` in your system regarding this transaction. Split(able) will ask for this `transaction_id` if you need to contact us. This parameter is also required for issuing a refund.
+`transaction_id`: This is so you may have a unique `transaction_id` in your system regarding this transaction. Split(able) will ask for this `transaction_id` if you need to contact us. This parameter is also required for issuing a refund with Split(able) merchant processing.
 
 ### An example in curl
 
@@ -185,7 +190,7 @@ curl http://www.nimbleshop.net/payment_notifications/splitable \
 
 ### Client acknowledgement
 
-To ensure that you've received the callback, split(able) checks the http response code for the callback made. If the response code is not `200` then split(able) will make another attempt to make the callback in increasing order of time. In total, split(able) will make 25 attempts, and the distribution of those 25 attempts is given below.
+To ensure that you've received the callback, Split(able) checks the http response code for the callback made. If the response code is not `200` then split(able) will make another attempt to make the callback in increasing order of time. In total, Split(able) will make 25 attempts, and the distribution of those 25 attempts is given below.
 
     1st attempt : less than a minute
     2nd attempt : less than a minute
@@ -215,5 +220,7 @@ To ensure that you've received the callback, split(able) checks the http respons
 
 ## Contact Us
 
-We are constantly working on improvements and releasing new features. Please reach out to us with any questions at hello@splitable.com.
+We are constantly working on improvements and releasing new features. 
+
+If you have a question, you can reach out to us anytime at hello@splitable.com.
 
