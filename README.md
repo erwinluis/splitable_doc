@@ -217,7 +217,5 @@ To ensure that you've received the callback, split(able) checks the http respons
 
 ## Contact Us
 
-We are constantly working on improvements and releasing new features. 
-
-If you have a question, you can reach out to us anytime at hello@splitable.com.
+We are constantly working on improvements and releasing new features. If there's something we can do to make the API better, please let us know. You can reach out to us anytime at hello@splitable.com.
 
