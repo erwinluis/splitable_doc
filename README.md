@@ -3,7 +3,7 @@
 
 ## split(able) API
 
-With split(able) API, your customers can split the cost of a total amount with their friends.
+With split(able)'s API, your customers can split the cost of a total amount with their friends.
 
 split(able) easily integrates directly with your checkout page and can be set to use your existing payment gateway.  split(able) also offers a full stack payment solution, where you don't need a payment gateway or merchant account.
 
