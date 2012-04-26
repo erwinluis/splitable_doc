@@ -173,6 +173,16 @@ parameters.
 
 `transaction_id`: This is so you may have a unique `transaction_id` in your system regarding this transaction. Split(able) will ask for this `transaction_id` if you need to contact us. This parameter is also required for issuing a refund.
 
+### An example in curl
+
+```
+curl http://www.nimbleshop.net/payment_notifications/splitable \
+       -d invoice=3789273937239273 \
+       -d payment_status=paid \
+       -d api_secret=82746e2d66cb8993 \
+       -d transaction_id=852973493383974
+```
+
 ### Client acknowledgement
 
 To ensure that you've received the callback, split(able) checks the http response code for the callback made. If the response code is not `200` then split(able) will make another attempt to make the callback in increasing order of time. In total, split(able) will make 25 attempts, and the distribution of those 25 attempts is given below.
