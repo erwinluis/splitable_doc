@@ -97,7 +97,7 @@ Sample error response:
        -d invoice=3789273937239273 \
        -d "api_notify_url=http://www.acme.com/instant_payment_notification/splitable" \
        -d total_amount=35000 \
-       -d exires_in=48 \
+       -d expires_in=48 \
        -d shipping=1000 \
        -d tax=4000 \
        -d "description=Campus books has the best selection of educational books in the market" \
