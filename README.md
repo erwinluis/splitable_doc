@@ -13,9 +13,7 @@ split(able) easily integrates directly with your checkout page and can be set to
 * Browser sends a `GET or POST` request to your server.
 * Your server sends a `POST` request to split(able) with valid `api_key`, `total_amount` and other required parameters.
 * User is redirected to the split(able) payment hub, which displays the line items and total amount to be split.
-* User invites friends and pays an amount toward the total cost.
-* Each invitee receives an invitation with a unique link to the payment hub.
-* From the invitation link, invitees are automatically signed in and prompted to pay toward the total amount.
+* Each payment hub has a unique link. User can copy this link and send it to other people, so they can pay towards the total amount.
 * When the total amount is paid within the given time frame, split(able) sends a callback to your server indicating that the split was successful.
 * If the total amount is not reached and the given time frame has elapsed, the callback will indicate that the team was cancelled.
 
