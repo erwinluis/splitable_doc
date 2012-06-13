@@ -7,8 +7,6 @@ With split(able)'s API, your customers can split the cost of a total amount with
 
 split(able) easily integrates directly with your checkout page and can be set to use your existing payment gateway.  split(able) also offers a full stack payment solution, where you don't need a payment gateway or merchant account.
 
-Watch a video of how split(able) works with a shopping cart: http://vimeo.com/37293414
-
 ### How it works
 
 * From the checkout page, your customer selects split(able) as their payment option.
